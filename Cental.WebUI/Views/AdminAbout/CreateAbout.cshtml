@@ -1,10 +1,9 @@
 ﻿@model CreateAboutDto
 @{
-    ViewData["Title"] = "CreateAbout";
+    ViewData["Title"] = "Yeni Hakkımızda Alanı Oluştur";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
 }
 
-<h3>Yeni Hakkımızda Alanı Oluşturma Sayfası</h3>
-<br />
 <form method="post">
     <label>Vizyonumuz</label>
     <input type="text" asp-for="Vision" class="form-control" />
