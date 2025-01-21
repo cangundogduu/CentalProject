@@ -1,9 +1,13 @@
 using Cental.BusinessLayer.Abstract;
 using Cental.BusinessLayer.Concrete;
+using Cental.BusinessLayer.Extensions;
+using Cental.BusinessLayer.Validators;
 using Cental.DataAccessLayer.Abstract;
 using Cental.DataAccessLayer.Concrete;
 using Cental.DataAccessLayer.Context;
 using Cental.DataAccessLayer.Repositories;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,16 +21,11 @@ builder.Services.AddDbContext<CentalContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 
-builder.Services.AddScoped<IAboutService,AboutManager>();
-builder.Services.AddScoped<IAboutDal,EfAboutDal>();
+builder.Services.AddServiceRegistrations();
 
-builder.Services.AddScoped<IBannerService, BannerManager>();
-builder.Services.AddScoped<IBannerDal, EfBannerDal>();
-
-builder.Services.AddScoped<IBrandService, BrandManager>();
-builder.Services.AddScoped<IBrandDal, EfBrandDal>();
-
-
+builder.Services.AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters()
+                .AddValidatorsFromAssemblyContaining<BrandValidator>();
 
 builder.Services.AddControllersWithViews();
 
