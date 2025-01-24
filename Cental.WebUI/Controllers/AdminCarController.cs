@@ -13,7 +13,7 @@ namespace Cental.WebUI.Controllers
     {
         public IActionResult Index()
         {
-            var values = _carService.TGetCarsWithBrands();
+            var values = _carService.TGetAll();
 
             return View(values);
         }

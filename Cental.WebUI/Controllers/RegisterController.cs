@@ -1,0 +1,41 @@
+﻿using AutoMapper;
+using Cental.DtoLayer.UserDtos;
+using Cental.EntityLayer.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Cental.WebUI.Controllers
+{
+    public class RegisterController(UserManager<AppUser> _userManager, IMapper _mapper) : Controller
+    {
+        public IActionResult SingUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SingUp(UserRegisterDto model)
+        {
+            var user = _mapper.Map<AppUser>(model);
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+
+            //bir küçük harf, bir büyük harf, rakam ,özel karakter, en az 6 
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+            {
+                foreach (var eror in result.Errors)
+                {
+                    ModelState.AddModelError(eror.Code, eror.Description);
+                }
+                return View(model);
+            }
+
+
+            return RedirectToAction("Index", "Login");
+        }
+    }
+}
