@@ -29,7 +29,7 @@ namespace Cental.WebUI.Controllers
             {
                 foreach (var eror in result.Errors)
                 {
-                    ModelState.AddModelError(eror.Code, eror.Description);
+                    ModelState.AddModelError(string.Empty, eror.Description);
                 }
                 return View(model);
             }

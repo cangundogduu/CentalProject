@@ -9,6 +9,7 @@ using Cental.DataAccessLayer.Repositories;
 using Cental.EntityLayer.Entities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.CodeAnalysis.FlowAnalysis;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +19,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 //about service gördüðün zamazn git about manager sýnýfýndan bir nesne örneði al ve iþlemi onunla yap.
 builder.Services.AddDbContext<CentalContext>();
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<CentalContext>();
+builder.Services.AddIdentity<AppUser, AppRole>(cfg =>
+   {
+       cfg.User.RequireUniqueEmail = true;
+   })
+                .AddEntityFrameworkStores<CentalContext>()
+                .AddErrorDescriber<CustomErorDescriber>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -45,8 +51,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.UseAuthorization();
+app.UseAuthentication();//sistemde kayýtlý mý deðil mi?
+app.UseAuthorization();//yetkisi var mý?
 
 app.MapControllerRoute(
     name: "default",
