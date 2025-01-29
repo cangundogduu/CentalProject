@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cental.BusinessLayer.Validators
 {
-    public class CustomErorDescriber: IdentityErrorDescriber
+    public class CustomErrorDescriber: IdentityErrorDescriber
     {
         public override IdentityError PasswordRequiresLower()
         {

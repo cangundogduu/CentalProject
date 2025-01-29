@@ -9,6 +9,7 @@ using Cental.DataAccessLayer.Repositories;
 using Cental.EntityLayer.Entities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.CodeAnalysis.FlowAnalysis;
 using System.Reflection;
 
@@ -24,7 +25,7 @@ builder.Services.AddIdentity<AppUser, AppRole>(cfg =>
        cfg.User.RequireUniqueEmail = true;
    })
                 .AddEntityFrameworkStores<CentalContext>()
-                .AddErrorDescriber<CustomErorDescriber>();
+                .AddErrorDescriber<CustomErrorDescriber>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -35,7 +36,16 @@ builder.Services.AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters()
                 .AddValidatorsFromAssemblyContaining<BrandValidator>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(opt =>
+{
+    opt.Filters.Add(new AuthorizeFilter());
+});
+
+builder.Services.ConfigureApplicationCookie(cfg =>
+{
+    cfg.LoginPath = "/Login/Index";
+    cfg.LogoutPath = "/Login/Logout";
+});
 
 var app = builder.Build();
 
