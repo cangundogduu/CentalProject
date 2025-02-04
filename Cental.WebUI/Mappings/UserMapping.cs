@@ -9,6 +9,8 @@ namespace Cental.WebUI.Mappings
         public UserMapping()
         {
             CreateMap<AppUser,UserRegisterDto>().ReverseMap();
+            CreateMap<AppUser,ResultUserDto>().ReverseMap();
+
         }
     }
 }

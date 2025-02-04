@@ -45,6 +45,7 @@ builder.Services.ConfigureApplicationCookie(cfg =>
 {
     cfg.LoginPath = "/Login/Index";
     cfg.LogoutPath = "/Login/Logout";
+    cfg.AccessDeniedPath = "/ErrorPage/AccessDenied";
 });
 
 var app = builder.Build();
@@ -59,6 +60,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseStatusCodePagesWithReExecute("/ErrorPage/NotFound404/");
 
 app.UseRouting();
 app.UseAuthentication();//sistemde kayýtlý mý deðil mi?
@@ -67,5 +69,11 @@ app.UseAuthorization();//yetkisi var mý?
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+app.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
 
 app.Run();
