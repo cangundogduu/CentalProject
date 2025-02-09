@@ -1,15 +1,14 @@
-﻿
-@*
+﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-<form class="filter-form" asp-action="FilterCars" method="post" asp-controller="Cars">
+<form class="filter-form mb-4" asp-action="FilterCars" method="post" asp-controller="Cars">
     <div class="container mt-4">
         <div class="row g-3">
             <div class="col-md-3">
                 <div class="form-group">
-                    <select class="form-control" asp-items="@ViewBag.brands" name="car">
-                        <option selected disabled>Araç Seçin</option>
-                       
+                    <select class="form-control" asp-items="@ViewBag.brands" name="brand">
+                        <option selected disabled>Marka Seçin</option>
+
                     </select>
                 </div>
             </div>
@@ -17,7 +16,7 @@
                 <div class="form-group">
                     <select class="form-control" name="gas" asp-items="@ViewBag.gasTypes">
                         <option selected disabled>Yakıt Türü Seçin</option>
-                     
+
                     </select>
                 </div>
             </div>

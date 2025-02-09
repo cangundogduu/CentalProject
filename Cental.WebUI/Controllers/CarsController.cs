@@ -3,6 +3,7 @@ using Cental.DataAccessLayer.Context;
 using Cental.DtoLayer.Enums;
 using Cental.EntityLayer.Entities;
 using Cental.WebUI.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json;
@@ -10,66 +11,71 @@ using System.Text.Json.Serialization;
 
 namespace Cental.WebUI.Controllers
 {
+    [AllowAnonymous]
     public class CarsController(ICarService _carService, IBrandService _brandService, CentalContext _context) : Controller
     {
         public IActionResult Index()
         {
-            var data = TempData["filterCars"].ToString();
-            if (data==null)
+            if (TempData["filterCars"] != null)
             {
-                var valuess = _carService.TGetAll();
-                return View(valuess);
+                var data = TempData["filterCars"].ToString();
+                if (data != null)
+                {
+                    var filterCars = JsonSerializer.Deserialize<List<Car>>(data, new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.IgnoreCycles
+                    });
+
+                    return View(filterCars);
+                }
             }
 
-            var filterCars = JsonSerializer.Deserialize<List<Car>>(data, new JsonSerializerOptions
+            var values = _carService.TGetAll();
+            return View(values);
+
+
+        }
+
+
+        [HttpPost]
+        public IActionResult FilterCars(string brand, string gear, int year, string gas)
+        {
+            IQueryable<Car> values = _context.Cars.AsQueryable();
+
+            if (!string.IsNullOrEmpty(brand))
+            {
+
+                values = values.Where(x => x.Brand.BrandName == brand);
+
+            }
+
+            if (!string.IsNullOrEmpty(gear))
+            {
+
+                values = values.Where(x => x.GearType == gear);
+
+            }
+
+            if (!string.IsNullOrEmpty(gas))
+            {
+
+                values = values.Where(x => x.GasType == gas);
+
+            }
+
+            if (year > 0)
+            {
+
+                values = values.Where(x => x.Year >= year);
+
+            }
+
+            var filterList= values.ToList();
+            TempData["filterCars"] = JsonSerializer.Serialize(filterList, new JsonSerializerOptions
             {
                 ReferenceHandler = ReferenceHandler.IgnoreCycles
             });
 
-            var values = _carService.TGetAll();
-            return View();
-        }
-
-        public PartialViewResult FilterCars()
-        {
-            var cars = _carService.TGetAll();
-
-            ViewBag.cars = (from x in cars
-                            select new SelectListItem
-                            {
-                                Text = x.Brand.BrandName + " " + x.ModelName,
-                                Value = x.Brand.BrandName + " " + x.ModelName
-                            }).ToList();
-
-            //ViewBag.models = (from x in _carService.TGetAll()
-            //                  select new SelectListItem
-            //                  {
-            //                      Text = x.ModelName,
-            //                      Value = x.ModelName
-            //                  }).ToList();
-
-            ViewBag.gasTypes = GetEnumValues.GetEnums<GasTypes>();
-            ViewBag.gearTypes = GetEnumValues.GetEnums<GearTypes>();
-
-            return PartialView();
-        }
-
-        [HttpPost]
-        public IActionResult FilterCars(string car, string gear, int year, string gas)
-        {
-            if (string.IsNullOrEmpty(car) || string.IsNullOrEmpty(gear) || string.IsNullOrEmpty(gas) || year > 0)
-            {
-                var values = _context.Cars.Where(x => x.Brand.BrandName + " " + x.ModelName == car &&
-                                                 x.GearType == gear &&
-                                                 x.GasType == gas &&
-                                                 x.Year >= year).ToList();
-
-                TempData["filterCars"]= JsonSerializer.Serialize(values,new JsonSerializerOptions
-                {
-                    ReferenceHandler = ReferenceHandler.IgnoreCycles
-                });
-                
-            }
             return RedirectToAction("Index");
         }
     }
