@@ -1,5 +1,4 @@
-﻿﻿
-
+﻿
 @model UpdateBookingDto
 
 @{
@@ -8,16 +7,6 @@
 }
 
 <form method="post">
-    <input type="hidden" asp-for="BookingId" />
-
-    <select asp-for="UserId" class="form-control">
-        <option selected>Rezervasyonun ait olduğu kullanıcı seçin</option>
-        @foreach (var user in ViewBag.UserSelectedList)
-        {
-            <option value="@user.Value">@user.Text</option>
-        }
-    </select>
-    <br />
 
     <label>Aracınızı Seçin</label>
     <select asp-for="CarId" class="form-control">

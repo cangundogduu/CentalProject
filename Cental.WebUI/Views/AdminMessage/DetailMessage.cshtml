@@ -1,0 +1,35 @@
+﻿@model DetailMessageDto
+@{
+    ViewData["Title"] = "DetailMessage";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+}
+
+<div>
+    <label>Ad Soyad</label>
+    <span class="form-control" readonly>@Model.FullName</span>
+</div>
+<br />
+
+<div>
+    <label>Email</label>
+    <span class="form-control" readonly>@Model.Email</span>
+</div>
+<br />
+
+<div>
+    <label>Konu</label>
+    <span class="form-control" readonly>@Model.Subject</span>
+</div>
+<br />
+
+<div>
+    <label>Mesaj</label>
+    <span class="form-control" readonly>@Model.MessageContent</span>
+</div>
+<br />
+
+<div class="text-center">
+    <a href="/AdminMessage/Index" class="btn btn-outline-primary">Geri Dön</a>
+</div>
+<br />
+

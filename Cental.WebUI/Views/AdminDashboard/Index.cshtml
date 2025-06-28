@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+}
+
+
+<!-- [ Main Content ] start -->
+<div class="row">
+    <!-- table card-1 start -->
+    <div class="col-md-6 col-xl-6">
+        <div class="card flat-card">
+            <div class="row-table">
+                <div class="col-sm-6 card-body br">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="icon feather icon-user text-c-green mb-1 d-block"></i>
+                        </div>
+                        <div class="col-sm-8 text-md-center">
+                            <h5>@ViewBag.TotalUsers</h5>
+                            <span>Toplam Kullanıcı Sayısı</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 card-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="fa-regular fa-bookmark text-c-blue mb-1 d-block"></i>
+                        </div>
+                        <div class="col-sm-8 text-md-center">
+                            <h5>@ViewBag.TotalBrands</h5>
+                            <span>Toplam Marka Sayısı</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-table">
+                <div class="col-sm-6 card-body br">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="fa-solid fa-car text-c-red mb-1 d-block"></i>
+                        </div>
+                        <div class="col-sm-8 text-md-center">
+                            <h5>@ViewBag.TotalCars</h5>
+                            <span>Toplam Araç Sayısı</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 card-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="icon feather icon-mail text-c-red mb-1 d-block"></i>
+                        </div>
+                        <div class="col-sm-8 text-md-center">
+                            <h5>@ViewBag.MessageCount</h5>
+                            <span>Toplam Mesaj Sayısı</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- widget primary card start -->
+        <!-- widget primary card end -->
+    </div>
+    <!-- table card-1 end -->
+    <!-- table card-2 start -->
+    <div class="col-md-6 col-xl-6">
+        <div class="card flat-card">
+            <div class="row-table">
+                <div class="col-sm-6 card-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="fa-regular fa-face-smile text-c-yellow mb-1 d-block"></i>
+                        </div>
+                        <div class="col-sm-8 text-md-center">
+                            <h5>@ViewBag.WaitingBookingCount</h5>
+                            <span>Bekleyen Rezervasyonlar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-table">
+                <div class="col-sm-6 card-body br">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="fa-regular fa-face-smile text-c-purple mb-1 d-block"></i>
+                        </div>
+                        <div class="col-sm-8 text-md-center">
+                            <h5>@ViewBag.ApprovedBookingCount</h5>
+                            <span>Onaylanan Rezervasyonlar</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 card-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="fa-regular fa-face-rolling-eyes text-c-purple mb-1 d-block"></i>
+                        </div>
+                        <div class="col-sm-8 text-md-center">
+                            <h5>@ViewBag.DeclineBookingCount</h5>
+                            <span>Reddedilen Rezervasyonlar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- widget-success-card start -->
+        <!-- widget-success-card end -->
+    </div>
+    <!-- table card-2 end -->
+    <!-- prject ,team member start -->
+    <div class="col-xl-6 col-md-12">
+        <div class="card latest-update-card">
+            <div class="card-header">
+                <h5>Son Eklenen Araçlar</h5>
+            </div>
+            <div class="card-body">
+                <div class="latest-update-box">
+                    <div class="row p-t-30 p-b-30">
+                        @foreach (var item in ViewBag.LastAddedCars)
+                        {
+                            <div class="col-12 mb-3">
+                                <div class="row">
+                                    <div class="col-auto text-right update-meta">
+                                        <p class="text-muted m-b-0 d-inline-flex"></p>
+                                        <i class="feather icon-award bg-twitter update-icon"></i>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#!">
+                                            <h6>@item.Brand.BrandName @item.ModelName</h6>
+                                        </a>
+                                        <p class="text-muted m-b-0">Yıl: @item.Year - Ücret : @item.Price ₺</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="text-center">
+                <a href="/AdminCar/Index" class="b-b-primary text-primary">Tüm Araçları Listele</a>
+                <br />
+                <br />
+            </div>
+        </div>
+
+    </div>
+    <!-- prject ,team member start -->
+    <!-- Latest Customers start -->
+    <div class="col-12">
+        <div class="card table-card review-card">
+            <div class="card-header borderless">
+                <h5>Son 5 Site Değerlendirmeleri</h5>
+            </div>
+            <div class="card-body pb-0">
+                <div class="review-block">
+                    <div class="row d-flex flex-wrap">
+                        @foreach (var item in ViewBag.Testimonials)
+                        {
+                            <div class="col-sm-12 col-md-6 col-lg-4 d-flex mb-3">
+                                <div class="d-flex w-100">
+                                    <div class="p-r-0">
+                                        <img src="@item.ImageUrl" alt="user image" class="img-radius profile-img cust-img m-b-15">
+                                    </div>
+                                    <div class="ml-3">
+                                        <h6 class="m-b-15">@item.Name <span class="float-right f-13 text-muted"></span></h6>
+                                        @for (int i = 1; i <= item.Review; i++)
+                                        {
+                                            <i class="feather icon-star-on f-18 text-c-yellow"></i>
+                                        }
+                                        @for (int i = 1; i <= (5 - item.Review); i++)
+                                        {
+                                            <i class="feather icon-star f-18 text-muted" style="opacity: 0.5;"></i>
+                                        }
+                                        <p class="m-t-15 m-b-15 text-muted">@item.Comment</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Latest Customers end -->
+
+</div>
+

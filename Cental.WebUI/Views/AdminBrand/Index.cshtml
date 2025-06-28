@@ -1,12 +1,12 @@
-﻿﻿@using PagedList.Core
-@model PagedList<Brand>
+﻿
+@model PagedList<ResultBrandDto>
 @{
     ViewData["Title"] = "Markalar";
     Layout = "~/Views/AdminLayout/Layout.cshtml";
 }
 
 @{
-    int count = Model.PageSize * Model.PageNumber - (Model.PageSize);
+    int count = (Model.PageNumber * Model.PageSize - (Model.PageSize - 1));
 }
 <table class="table table-bordered">
     <tr>
@@ -15,22 +15,25 @@
         <th>Sil</th>
         <th>Güncelle</th>
     </tr>
+
     @foreach (var item in Model)
     {
-        count++;
+
         <tr>
             <td>@count</td>
             <td>@item.BrandName</td>
-            <td><a asp-action="DeleteBrand" asp-route-id="@item.BrandId" class="btn btn-danger"><i class="fa fa-trash"></i> </a> </td>
-            <td><a asp-action="UpdateBrand" asp-route-id="@item.BrandId" class="btn btn-info"><i class="fa fa-pen"></i>  </a> </td>
+            <td><a asp-action="DeleteBrand" asp-route-id="@item.BrandId" class="btn btn-danger"><i class="fa fa-trash"></i> Sil</a></td>
+            <td><a asp-action="UpdateBrand" asp-route-id="@item.BrandId" class="btn btn-warning"><i class="fa fa-pen"></i> Güncelle</a></td>
         </tr>
+        count++;
+
     }
-
-
 </table>
 
 <div class="text-center">
     <pager asp-action="Index" asp-controller="AdminBrand" list="@Model"></pager>
 </div>
 
-<a asp-action="CreateBrand" asp-controller="AdminBrand" class="btn btn-primary"><i class="fa fa-plus-circle"></i>  Yeni Marka Ekle</a>
+<div class="text-center">
+    <a asp-action="CreateBrand" asp-controller="AdminBrand" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Yeni Marka Ekle</a>
+</div>

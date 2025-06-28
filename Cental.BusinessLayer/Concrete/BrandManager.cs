@@ -21,6 +21,7 @@ namespace Cental.BusinessLayer.Concrete
         public void TCreate(Brand entity)
         {
             _brandDal.Create(entity);
+            
         }
 
         public void TDelete(int id)

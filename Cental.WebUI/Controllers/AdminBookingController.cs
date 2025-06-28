@@ -39,7 +39,7 @@ namespace Cental.WebUI.Controllers
             var cars = (from x in _carService.TGetAll()
                         select new SelectListItem
                         {
-                            Text = x.ModelName + " " + x.Brand + "" + x.Year,
+                            Text = x.GearType + " " + x.ModelName + " " + x.Year,
                             Value = x.CarId.ToString()
 
                         }).ToList();

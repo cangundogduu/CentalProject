@@ -1,4 +1,4 @@
-﻿
+﻿@model List<ResultBookingDto>
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -16,82 +16,68 @@
                         <div class="row g-5">
                             <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
                                 <div class="bg-secondary rounded p-5">
-                                    <h4 class="text-white mb-4">CONTINUE CAR RESERVATION</h4>
-                                    <form>
+                                    <h4 class="text-white mb-4">Hemen Aracınızı Kiralayın!</h4>
+                                    <form method="post">
+                                       @foreach (var item in Model)
+                                        {
+                                            
+                                        
                                         <div class="row g-3">
                                             <div class="col-12">
                                                 <select class="form-select" aria-label="Default select example">
-                                                    <option selected>Select Your Car type</option>
-                                                    <option value="1">VW Golf VII</option>
-                                                    <option value="2">Audi A1 S-Line</option>
-                                                    <option value="3">Toyota Camry</option>
-                                                    <option value="4">BMW 320 ModernLine</option>
+                                                    <option selected>Lütfen Aracınızı Seçin </option>
+                                                    <option>@item.Car.ModelName</option>
                                                 </select>
                                             </div>
                                             <div class="col-12">
                                                 <div class="input-group">
                                                     <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                        <span class="fas fa-map-marker-alt"></span> <span class="ms-1">Pick Up</span>
+                                                        <span class="fas fa-map-marker-alt"></span> <span class="ms-1">Alış Yeri</span>
                                                     </div>
-                                                    <input class="form-control" type="text" placeholder="Enter a City or Airport" aria-label="Enter a City or Airport">
+                                                    <input class="form-control" type="text" placeholder="Lütfen aracı almak istediğiniz lokasyonu yazınız.." aria-label="Enter a City or Airport">@item.PickupLocation
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <a href="#" class="text-start text-white d-block mb-2">Need a different drop-off location?</a>
+                                                <a href="#" class="text-start text-white d-block mb-2">Aracı alış yerinden farklı bir yerde mi teslim etmek istiyorsunuz?</a>
                                                 <div class="input-group">
                                                     <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                        <span class="fas fa-map-marker-alt"></span><span class="ms-1">Drop off</span>
+                                                        <span class="fas fa-map-marker-alt"></span><span class="ms-1">Teslim Yeri</span>
                                                     </div>
-                                                    <input class="form-control" type="text" placeholder="Enter a City or Airport" aria-label="Enter a City or Airport">
+                                                    <input class="form-control" type="text" placeholder="Lütfen Teslim etmek istediğiniz yeri yazınız.." aria-label="Enter a City or Airport">@item.DropOffLocation
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="input-group">
                                                     <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                        <span class="fas fa-calendar-alt"></span><span class="ms-1">Pick Up</span>
+                                                        <span class="fas fa-calendar-alt"></span><span class="ms-1">Alış Tarihi</span>
                                                     </div>
-                                                    <input class="form-control" type="date">
+                                                    <input class="form-control" type="date">@item.PickupDate
                                                     <select class="form-select ms-3" aria-label="Default select example">
-                                                        <option selected>12:00AM</option>
-                                                        <option value="1">1:00AM</option>
-                                                        <option value="2">2:00AM</option>
-                                                        <option value="3">3:00AM</option>
-                                                        <option value="4">4:00AM</option>
-                                                        <option value="5">5:00AM</option>
-                                                        <option value="6">6:00AM</option>
-                                                        <option value="7">7:00AM</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="input-group">
                                                     <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                        <span class="fas fa-calendar-alt"></span><span class="ms-1">Drop off</span>
+                                                        <span class="fas fa-calendar-alt"></span><span class="ms-1">Teslim Tarihi</span>
                                                     </div>
-                                                    <input class="form-control" type="date">
+                                                    <input class="form-control" type="date">@item.DropOffDate
                                                     <select class="form-select ms-3" aria-label="Default select example">
-                                                        <option selected>12:00AM</option>
-                                                        <option value="1">1:00AM</option>
-                                                        <option value="2">2:00AM</option>
-                                                        <option value="3">3:00AM</option>
-                                                        <option value="4">4:00AM</option>
-                                                        <option value="5">5:00AM</option>
-                                                        <option value="6">6:00AM</option>
-                                                        <option value="7">7:00AM</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <button class="btn btn-light w-100 py-2">Book Now</button>
+                                                    <button class="btn btn-light w-100 py-2" asp-action="/AdminBooking/CreateBooking">Şimdi Kirala</button>
                                             </div>
                                         </div>
+                                        }
                                     </form>
                                 </div>
                             </div>
                             <div class="col-lg-6 d-none d-lg-flex fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;">
                                 <div class="text-start">
-                                    <h1 class="display-5 text-white">Get 15% off your rental Plan your trip now</h1>
-                                    <p>Treat yourself in USA</p>
+                                    <h1 class="display-5 text-white">Bu yıl sonuna kadar kiralayacağınız araçlarda günlük %15 indirim oranları ile </h1>
+                                    <p>Türkiyenin her bölgesinde teslimat yapılır..</p>
                                 </div>
                             </div>
                         </div>

@@ -1,16 +1,17 @@
-﻿@model CreateBrandDto
+﻿@model UpdateBrandDto
 @{
-    ViewData["Title"] = "Yeni Marka Oluştur";
+    ViewData["Title"] = "UpdateBrand";
     Layout = "~/Views/AdminLayout/Layout.cshtml";
 }
 
 <form method="post">
+    @Html.HiddenFor(x => x.BrandId)
     <label>Marka Adı</label>
     <input type="text" asp-for="BrandName" class="form-control" />
     <span asp-validation-for="BrandName" class="text-danger"></span>
-    <br />
+    <br>
     <div class="text-center">
-        <button class="btn btn-primary"><i class="fa fa-save"></i> Kaydet</button>
+        <button class="btn btn-outline-primary"><i class="fa fa-save"></i> Güncelle</button>
     </div>
 </form>
 

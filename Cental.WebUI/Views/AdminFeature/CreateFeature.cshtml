@@ -1,0 +1,31 @@
+﻿@model CreateFeatureDto
+@{
+    ViewData["Title"] = "CreateFeature";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+}
+
+<form method="post">
+    <div>
+        <label>Başlık</label>
+        <input type="text" class="form-control" asp-for="Title" />
+    </div>
+    <br />
+
+    <div>
+        <label>Açıklama</label>
+        <input type="text" class="form-control" asp-for="Description" />
+    </div>
+    <br />
+
+    <div>
+        <label>Ikon</label>
+        <input type="text" class="form-control" asp-for="Icon" />
+    </div>
+    <br />
+
+    <div class="text-center">
+        <button class="btn btn-outline-primary">Kaydet</button>
+    </div>
+    <br />
+</form>
+

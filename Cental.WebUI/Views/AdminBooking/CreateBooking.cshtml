@@ -11,7 +11,7 @@
 
     <select asp-for="UserId" class="form-control">
         <option selected>Rezervasyon oluşturmak istediğiniz kullanıcıyı seçin</option>
-        @foreach (var user in ViewBag.GetUserSelectedList)
+        @foreach (var user in ViewBag.Users)
         {
             <option value="@user.Value">@user.Text</option>
         }
@@ -20,7 +20,7 @@
 
     <select asp-for="CarId" class="form-control">
         <option selected>Aracınızı seçin</option>
-        @foreach (var car in ViewBag.GetCarSelectedList)
+        @foreach (var car in ViewBag.Cars)
         {
             <option value="@car.Value">@car.Text</option>
         }

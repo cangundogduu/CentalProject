@@ -1,0 +1,50 @@
+﻿
+@model List<ResultMessageDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+}
+@{
+    int count = 0;
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Ad Soyad</th>
+        <th>Email</th>
+        <th>Konu</th>
+        <th>Mesaj Durumu</th>
+        <th>Sil</th>
+        <th>Görüntüle</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <td>@count</td>
+            <td>@item.FullName</td>
+            <td>@item.Email</td>
+            <td>@item.Subject</td>
+            <td>
+                @if (item.MessageStatus==true)
+                {
+                    <text>Okundu</text>
+                }
+                else
+                {
+                    <text>Okunmadı!</text>
+                }
+               
+            </td>
+            <td><a asp-action="DeleteMessage" asp-route-id="@item.MessageId" class="btn btn-danger">Sil</a></td>
+            <td><a asp-action="DetailMessage" asp-route-id="@item.MessageId" class="btn btn-warning">Görüntüle</a></td>
+        </tr>
+    }
+</table>
+
+<div class="text-center">
+    <a asp-action="CreateMessage" asp-controller="AdminMessage" class="btn btn-primary">Yeni Mesaj Ekle</a>
+</div>
+

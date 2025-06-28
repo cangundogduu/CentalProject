@@ -61,6 +61,9 @@ namespace Cental.BusinessLayer.Extensions
             services.AddScoped<IReviewService, ReviewManager>();
             services.AddScoped<IReviewDal, EfReviewDal>();
 
+            services.AddScoped<IDashboardService, DashboardManager>();
+            services.AddScoped<IDashboardDal, EfDashboardDal>();
+
         }
     }
 }
