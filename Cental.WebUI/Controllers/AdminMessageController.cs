@@ -2,10 +2,12 @@
 using Cental.BusinessLayer.Abstract;
 using Cental.DtoLayer.MessageDtos;
 using Cental.EntityLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cental.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminMessageController(IMessageService _messageService, IMapper _mapper) : Controller
     {
         public IActionResult Index()
@@ -77,6 +79,6 @@ namespace Cental.WebUI.Controllers
         }
 
 
-        //mesajlar da tamamlandı
+        
     }
 }

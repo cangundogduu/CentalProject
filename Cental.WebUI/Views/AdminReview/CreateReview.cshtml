@@ -1,0 +1,48 @@
+﻿@model CreateReviewDto
+@{
+    ViewData["Title"] = "CreateReview";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+}
+
+<form method="post">
+
+    <div>
+        <label>Kullanıcı seçiniz : </label>
+        <select class="form-control" asp-items="@ViewBag.UserList" asp-for="UserId">
+            <option selected disabled>Puanlamasını girmek istediğiniz kulanıcıyı seçiniz.</option>
+        </select>
+    </div>
+    <br />
+
+    <div>
+        <label>Puanınızı giriniz : </label>
+        <select class="form-control" asp-for="Rating">
+            <option selected disabled>Seçim yapınız.</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </div>
+    <br />
+
+    <div>
+        <label>Arabanızı seçiniz : </label>
+        <select class="form-control" asp-items="@ViewBag.CarList" asp-for="CarId">
+            <option selected disabled>Puanlama yapmak istediğiniz aracı seçiniz.</option>
+        </select>
+    </div>
+    <br />
+
+    <div class="text-center">
+        <button class="btn btn-outline-primary">Kaydet</button>
+    </div>
+    <br />
+</form>
+

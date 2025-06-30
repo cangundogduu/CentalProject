@@ -1,0 +1,47 @@
+﻿@model List<ResultReviewDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+}
+
+@{
+    int count = 0;
+}
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Kullanıcı Ad Soyad</th>
+        <th>Puan</th>
+        <th>Araç Görseli</th>
+        <th>Araç Bilgileri</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <td>@count</td>
+            <td>@item.User.FirstName @item.User.LastName</td>
+            <td>
+                @item.Rating / 10 <br />
+                @for (int i = 1; i <= item.Rating; i++)
+                {
+                    <i class="fa-solid fa-star"></i>
+                }
+                @for (int i = 1; i <= (10 - item.Rating); i++)
+                {
+                    <i class="fa-regular fa-star"></i>
+                }
+            </td>
+            <td><img src="@item.Car.ImageUrl" style="height:100px;width:100px" /></td>
+            <td>@item.Car.Brand.BrandName @item.Car.ModelName @item.Car.Year</td>
+            <td><a asp-action="DeleteReview" asp-route-id="@item.ReviewId" class="btn btn-danger">Sil</a> </td>
+            <td><a asp-action="UpdateReview" asp-route-id="@item.ReviewId" class="btn btn-info">Güncelle</a> </td>
+        </tr>
+    }
+</table>
+<div class="text-center">
+    <a asp-action="CreateReview" asp-controller="AdminReview" class="btn btn-primary">Yeni Değerlendirme Ekle</a>
+</div>
+
