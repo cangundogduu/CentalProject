@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Cental.BusinessLayer.Concrete
 {
-    internal class ImageService : IImageService
+    public class ImageService : IImageService
     {
         public async Task<string> SaveImageAsync(IFormFile file)
         {

@@ -1,0 +1,51 @@
+﻿@model List<ResultTestimonialDto>
+@{
+    ViewData["Title"] = "Müşteri Yorumları";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+}
+
+@{
+    int count = 0;
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Resim</th>
+        <th>Ad Soyad</th>
+        <th>Ünvan</th>
+        <th>Puanlama</th>
+        <th>Yorum</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <td>@count</td>
+            <td><image src="@item.ImageUrl" style="height:150px;width:150px"></image></td>
+            <td>@item.Name</td>
+            <td>@item.Title</td>
+            <td>
+                @item.Review / 5 <br />
+                @for (int i = 1; i <= item.Review; i++)
+                {
+                    <i class="fa-solid fa-star"></i>
+                }
+                @for (int i = 1; i <= (5 - item.Review); i++)
+                {
+                    <i class="fa-regular fa-star"></i>
+                }
+            </td>
+            <td>@item.Comment</td>
+            <td><a asp-action="DeleteTestimonial" asp-route-id="@item.TestimonialId" class="btn btn-danger">Sil</a></td>
+            <td><a asp-action="UpdateTestimonial" asp-route-id="@item.TestimonialId" class="btn btn-warning">Güncelle</a></td>
+        </tr>
+    }
+</table>
+
+<div class="text-center">
+    <a asp-action="CreateTestimonial" asp-controller="AdminTestimonial" class="btn btn-primary">Yeni Müşteri Yorumu Ekle</a>
+</div>

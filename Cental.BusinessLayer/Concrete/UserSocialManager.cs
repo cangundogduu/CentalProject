@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Cental.BusinessLayer.Concrete
 {
-    internal class UserSocialManager(IUserSocialDal _userSocialDal, IMapper _mapper) : IUserSocialService
+    public class UserSocialManager(IUserSocialDal _userSocialDal, IMapper _mapper) : IUserSocialService
     {
         public void TCreate(UserSocial entity)
         {

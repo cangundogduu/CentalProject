@@ -64,6 +64,8 @@ namespace Cental.BusinessLayer.Extensions
             services.AddScoped<IDashboardService, DashboardManager>();
             services.AddScoped<IDashboardDal, EfDashboardDal>();
 
+            services.AddScoped<ITestimonialService, TestimonialManager>();
+            services.AddScoped<ITestimonialDal, EfTestimonialDal>();
         }
     }
 }

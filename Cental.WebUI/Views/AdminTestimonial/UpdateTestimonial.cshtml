@@ -1,0 +1,60 @@
+﻿@model UpdateTestimonialDto
+@{
+    ViewData["Title"] = "UpdateTestimonial";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="TestimonialId" />
+
+    <div class="text-center">
+        <label>Varsayılan Resim</label>
+        <br />
+        <input type="hidden" asp-for="ImageUrl" />
+        <image src="@Model.ImageUrl" style="height:250px;width:250px"></image>
+    </div>
+    <br />
+
+    <div>
+        <label>Yeni Resim Ekle</label>
+        <input type="file" class="form-control" asp-for="ImageFile" />
+    </div>
+    <br />
+
+    <div>
+        <label>Ad Soyad</label>
+        <input type="text" class="form-control" asp-for="Name" />
+    </div>
+    <br />
+
+    <div>
+        <label>Ünvan</label>
+        <input type="text" class="form-control" asp-for="Title" />
+    </div>
+    <br />
+
+    <div>
+        <label>Puanınızı giriniz : </label>
+        <select class="form-control" asp-for="Review">
+            <option selected disabled>Seçim yapınız.</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    <br />
+
+    <div>
+        <label>Yorum</label>
+        <input type="text" class="form-control" asp-for="Comment" />
+    </div>
+    <br />
+
+    <div class="text-center">
+        <button class="btn btn-outline-primary">Güncelle</button>
+    </div>
+    <br />
+</form>
+
